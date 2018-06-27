@@ -2,13 +2,10 @@ import React from 'react'
 import {HashRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import Form from './Form'
-import Confirmation from './Confirmation'
-
 import {getCatsRequest} from '../actions/catActions'
 import {getCharacteristicsRequest} from '../actions/charactersticActions'
 
-class App extends React.Component {
+class Confirmation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,16 +18,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.props.complete ? <Confirmation /> : <Form />}
+        Your sign up has been complete! Good job!
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    complete: state.complete,
-  }
-}
-
-export default connect()(App)
+export default connect()(Confirmation)
