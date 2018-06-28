@@ -14,7 +14,7 @@ class Form extends React.Component {
       email: '',
       password: '',
       colour: '',
-      animal: [],
+      animals: [],
       animalType: ''
     }
     this.handleEmail = this.handleEmail.bind(this)
@@ -53,7 +53,13 @@ class Form extends React.Component {
 }
 
   handleAnimal(e) {
-    this.setState({animal: push(e.target.value)})
+    if (!this.state.animals.includes(e.target.value)) {
+      this.setState({animals: this.state.animals.push(e.target.value)})
+    } else {
+      let animalArr = this.state.animals.filter(animal => animal !== e.target.value)
+      this.setState({animals: animalArr})
+    }
+    console.log('state', this.state.animals)
   }
 
   handleSubmit() {
