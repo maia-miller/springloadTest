@@ -11,6 +11,7 @@ class Form extends React.Component {
       validEmail: true,
       validPass: true,
       validColour: true,
+      validAnimalArray: true,
       email: '',
       password: '',
       colour: '',
@@ -21,8 +22,10 @@ class Form extends React.Component {
     this.validateEmail = this.validateEmail.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
     this.handleColour = this.handleColour.bind(this)
+    this.handleAnimal = this.handleAnimal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   handleEmail(e) {
     if (this.validateEmail(e.target.value)) {
       this.setState({validEmail: true})
@@ -53,7 +56,7 @@ class Form extends React.Component {
 }
 
   handleAnimal(e) {
-    let activeAnimal= e.target.value
+    let activeAnimal = e.target.value
     let animalArr = this.state.animals
 
     if (!animalArr.includes(activeAnimal)) {
@@ -66,10 +69,22 @@ class Form extends React.Component {
   }
 
   handleSubmit() {
-    if(this.state.colour == false) {
-      this.setState({validcolour: false})
+    validateColour() && validateAnimalArray() && postSubmit()
+  }
+
+  validateColour() {
+    if(this.state.colour) {
+      return true
     } else {
-      postSubmit()
+      this.setState({validColour: false})
+    }
+  }
+
+  validateAnimalArray() {
+    if(this.state.animals.length >= 2)  {
+      return true
+    } else {
+      this.setState({validAnimalArray: false})
     }
   }
 
