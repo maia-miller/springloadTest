@@ -10,16 +10,18 @@ class Form extends React.Component {
     this.state = {
       validEmail: true,
       validPass: true,
+      validColour: true,
       email: '',
       password: '',
       colour: '',
-      animal: '',
+      animal: [],
       animalType: ''
     }
     this.handleEmail = this.handleEmail.bind(this)
     this.validateEmail = this.validateEmail.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleColour = this.handleColour.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleEmail(e) {
     if (this.validateEmail(e.target.value)) {
@@ -41,6 +43,24 @@ class Form extends React.Component {
       this.setState({validPass: true})
     } else {
       this.setState({validPass: false})
+    }
+  }
+
+  handleColour(e) {
+  let currentState = this.state
+  currentState[e.target.name] = e.target.value
+  this.setState(currentState)
+}
+
+  handleAnimal(e) {
+    this.setState({animal: push(e.target.value)})
+  }
+
+  handleSubmit() {
+    if(this.state.colour == false) {
+      this.setState({validcolour: false})
+    } else {
+      postSubmit()
     }
   }
 
@@ -77,7 +97,7 @@ class Form extends React.Component {
                     <label className='label' for='colour'>
                         Colour
                     </label>
-                    <select name='colour' id='colour' onChange={(e) => this.handleInput(e)}>
+                    <select name='colour' id='colour' onChange={(e) => this.handleColour(e)}>
                         <option value=''>Choose colour</option>
                         <option value='blue'>Blue</option>
                         <option value='green'>Green</option>
@@ -85,28 +105,31 @@ class Form extends React.Component {
                         <option value='black'>Black</option>
                         <option value='brown'>Brown</option>
                     </select>
+                    <div className={this.state.validColour ? "hide" : "error"}>
+                        You must select a colour
+                    </div>
                 </p>
                 <p>
                     <span className="label">
                         Animal
                     </span>
 
-                    <input type='checkbox' name='animal' value='bear' id='bear' />
+                    <input type='checkbox' name='animal' value='bear' id='bear' onChange={(e) => this.handleAnimal(e)}/>
                     <label for='bear'>
                          Bear
                     </label>
 
-                    <input type='checkbox' name='animal' value='tiger' id='tiger' />
+                    <input type='checkbox' name='animal' value='tiger' id='tiger' onChange={(e) => this.handleAnimal(e)}/>
                     <label for='tiger'>
                         Tiger
                     </label>
 
-                    <input type='checkbox' name='animal' value='snake' id='snake' />
+                    <input type='checkbox' name='animal' value='snake' id='snake' onChange={(e) => this.handleAnimal(e)}/>
                     <label for='snake'>
                          Snake
                     </label>
 
-                    <input type='checkbox' name='animal' value='donkey' id='donkey' />
+                    <input type='checkbox' name='animal' value='donkey' id='donkey' onChange={(e) => this.handleAnimal(e)}/>
                     <label for='donkey'>
                          Donkey
                     </label>
