@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {postEmail} from '../actions/formActions'
-// import {getCharacteristicsRequest} from '../actions/charactersticActions'
 
 class Form extends React.Component {
   constructor(props) {
@@ -74,6 +73,7 @@ class Form extends React.Component {
 
   validateColour() {
     if(this.state.colour) {
+      this.setState({validColour: true})
       return true
     } else {
       this.setState({validColour: false})
@@ -82,6 +82,7 @@ class Form extends React.Component {
 
   validateAnimalArray() {
     if(this.state.animals.length >= 2)  {
+      this.setState({validAnimalArray: true})
       return true
     } else {
       this.setState({validAnimalArray: false})
@@ -158,7 +159,7 @@ class Form extends React.Component {
                     </label>
 
                 </p>
-                <p>
+                <p className={this.state.animals.includes('tiger') ? "show" : "hide"}>
                     <label className='label' for='tiger_type'>
                         Type of tiger
                     </label>
