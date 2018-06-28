@@ -11,11 +11,12 @@ class Form extends React.Component {
       validPass: true,
       validColour: true,
       validAnimalArray: true,
+      validTigerType: true,
       email: '',
       password: '',
       colour: '',
       animals: [],
-      animalType: ''
+      tigerType: ''
     }
     this.handleEmail = this.handleEmail.bind(this)
     this.validateEmail = this.validateEmail.bind(this)
@@ -57,7 +58,6 @@ class Form extends React.Component {
   handleAnimal(e) {
     let activeAnimal = e.target.value
     let animalArr = this.state.animals
-
     if (!animalArr.includes(activeAnimal)) {
       animalArr.push(activeAnimal)
       this.setState({animals: animalArr})
@@ -68,7 +68,7 @@ class Form extends React.Component {
   }
 
   handleSubmit() {
-    validateColour() && validateAnimalArray() && postSubmit()
+    validateColour() && validateAnimalArray() && validateTigerType() && postSubmit()
   }
 
   validateColour() {
@@ -77,6 +77,7 @@ class Form extends React.Component {
       return true
     } else {
       this.setState({validColour: false})
+      return false
     }
   }
 
@@ -86,6 +87,16 @@ class Form extends React.Component {
       return true
     } else {
       this.setState({validAnimalArray: false})
+      return false
+    }
+  }
+
+  validateTigerType() {
+    if(this.state.animals.includes('tiger') && this.state.tigerType) {
+      return true
+    } else {
+      this.setState({validTigerType: false})
+      return false
     }
   }
 
@@ -164,6 +175,9 @@ class Form extends React.Component {
                         Type of tiger
                     </label>
                     <input type='text' name='tiger_type' id='tiger_type' />
+                    <div className={this.state.validTigerType ? "hide" : "show"}>
+                      Please describe your type of tiger
+                    </div>
                 </p>
             </fieldset>
             <fieldset>
