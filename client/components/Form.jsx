@@ -8,16 +8,21 @@ class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      validEmail: true
+      validEmail: true,
+      email: '',
+      password: '',
+      colour: '',
+      animal: '',
+      animalType: ''
     }
     this.handleEmail = this.handleEmail.bind(this)
     this.validateEmail = this.validateEmail.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
-//functions
   handleEmail(e) {
     if (this.validateEmail(e.target.value)) {
       this.setState({validEmail: true})
-      postEmail(e.target.value)
+      this.setState({email: e.target.value})
     } else {
       this.setState({validEmail: false})
     }
@@ -26,6 +31,12 @@ class Form extends React.Component {
   validateEmail(email) {
   let regex = /[^\s@]+@[^\s@]+\.[^\s@]+/
   return regex.test(email)
+  }
+
+  handleInput(e) {
+    let currentState = this.state
+    currentState[e.target.name] = e.target.value
+    this.setState(currentState)
   }
 
   render() {
@@ -47,7 +58,7 @@ class Form extends React.Component {
                     <label className='label' for='password'>
                         Password
                     </label>
-                    <input className='error' type='password' id='password' name='username' />
+                    <input className='error' type='password' id='password' name='password' onChange={(e) => this.handleInput(e)}/>
                 </p>
             </fieldset>
 
