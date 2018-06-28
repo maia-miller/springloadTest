@@ -40,6 +40,7 @@ class Form extends React.Component {
   }
 
   render() {
+    console.log('state', this.state)
     return (
         <form method='post' action=''>
             <h1>Fill out this awesome form</h1>
@@ -68,7 +69,7 @@ class Form extends React.Component {
                     <label className='label' for='colour'>
                         Colour
                     </label>
-                    <select name='colour' id='colour'>
+                    <select name='colour' id='colour' onChange={(e) => this.handleInput(e)}>
                         <option value=''>Choose colour</option>
                         <option value='blue'>Blue</option>
                         <option value='green'>Green</option>
