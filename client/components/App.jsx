@@ -20,9 +20,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.props.complete ? <Confirmation /> : <Form />}
-      </div>
+      <Router>
+        <div>
+          <Route exact path='/' component={Form} />
+          {this.props.complete && <Route exact path="/complete" component={Confirmation} /> }
+        </div>
+      </Router>
     )
   }
 }
