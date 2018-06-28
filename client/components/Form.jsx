@@ -9,6 +9,7 @@ class Form extends React.Component {
     super(props)
     this.state = {
       validEmail: true,
+      validPass: true,
       email: '',
       password: '',
       colour: '',
@@ -17,6 +18,7 @@ class Form extends React.Component {
     }
     this.handleEmail = this.handleEmail.bind(this)
     this.validateEmail = this.validateEmail.bind(this)
+    this.handlePassword = this.handlePassword.bind(this)
     // this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleEmail(e) {
@@ -33,14 +35,17 @@ class Form extends React.Component {
   return regex.test(email)
   }
 
-  handleInput(e) {
-    let currentState = this.state
-    currentState[e.target.name] = e.target.value
-    this.setState(currentState)
+  handlePassword(e) {
+    if(e.target.value.length >= 8) {
+      this.setState({password: e.target.value})
+      this.setState({validPass: true})
+    } else {
+      this.setState({validPass: false})
+    }
   }
 
   render() {
-    console.log('state', this.state)
+    // console.log('state', this.state)
     return (
         <form method='post' action=''>
             <h1>Fill out this awesome form</h1>
@@ -59,7 +64,10 @@ class Form extends React.Component {
                     <label className='label' for='password'>
                         Password
                     </label>
-                    <input className='error' type='password' id='password' name='password' onChange={(e) => this.handleInput(e)}/>
+                    <input className='error' type='password' id='password' name='password' onChange={(e) => this.handlePassword(e)}/>
+                    <div className={this.state.validPass ? "hide" : "error"}>
+                        Password must be at least 8 characters long
+                    </div>
                 </p>
             </fieldset>
 
