@@ -68,7 +68,7 @@ class Form extends React.Component {
   }
 
   handleSubmit() {
-    validateColour() && validateAnimalArray() && validateTigerType() && postSubmit()
+    validateEmail() && validateColour() && validateAnimalArray() && validateTigerType() && postSubmit()
   }
 
   validateColour() {
@@ -92,7 +92,7 @@ class Form extends React.Component {
   }
 
   validateTigerType() {
-    if(this.state.animals.includes('tiger') && this.state.tigerType) {
+    if(this.state.animals.includes('tiger') && this.state.tigerType.length > 0) {
       return true
     } else {
       this.setState({validTigerType: false})
