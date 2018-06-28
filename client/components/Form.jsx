@@ -53,13 +53,16 @@ class Form extends React.Component {
 }
 
   handleAnimal(e) {
-    if (!this.state.animals.includes(e.target.value)) {
-      this.setState({animals: this.state.animals.push(e.target.value)})
-    } else {
-      let animalArr = this.state.animals.filter(animal => animal !== e.target.value)
+    let activeAnimal= e.target.value
+    let animalArr = this.state.animals
+
+    if (!animalArr.includes(activeAnimal)) {
+      animalArr.push(activeAnimal)
       this.setState({animals: animalArr})
+    } else {
+      let newAnimalArr = animalArr.filter(animal => animal !== activeAnimal)
+      this.setState({animals: newAnimalArr})
     }
-    console.log('state', this.state.animals)
   }
 
   handleSubmit() {
@@ -71,7 +74,6 @@ class Form extends React.Component {
   }
 
   render() {
-    // console.log('state', this.state)
     return (
         <form method='post' action=''>
             <h1>Fill out this awesome form</h1>
