@@ -138,3 +138,7 @@ fieldset + fieldset {
 .error > input {
     border-color: red;
 }
+
+.hide {
+  display: none;
+}
